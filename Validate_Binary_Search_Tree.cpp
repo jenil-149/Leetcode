@@ -8,6 +8,12 @@
 using namespace std;
 
 // --- LeetCode Solution ---
+class Solution {
+public:
+    bool check(TreeNode* root,long long mn,long long mx)
+    {
+        if(root == NULL)
+            return true;
 
         if(root->val <= mn ||root->val >= mx)
             return false;
@@ -20,13 +26,7 @@ using namespace std;
     {
         return check(root,LLONG_MIN,LLONG_MAX);
     }
-            return true;
-        if(root == NULL)
-    {
 };
-    bool check(TreeNode* root,long long mn,long long mx)
-public:
-class Solution {
 
 int main() {
     return 0;
