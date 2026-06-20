@@ -23,9 +23,8 @@ using namespace std;
             return true;
         if(root == NULL)
     {
-    bool check(TreeNode* root,long long mn,long long mx)
 };
-
+    bool check(TreeNode* root,long long mn,long long mx)
 public:
 class Solution {
 
