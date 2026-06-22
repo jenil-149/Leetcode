@@ -13,9 +13,9 @@ public:
     int strStr(string haystack, string needle) {
         int m=needle.size();
         int n=haystack.size();
+
         if(m>n) return -1;
         
-
         for(int i=0;i<=n-m;i++){
             string s=haystack.substr(i,m);
             if(needle==s) return i;
