@@ -8,24 +8,40 @@
 using namespace std;
 
 // --- LeetCode Solution ---
-        int curR=0;
-        bool up=true;
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        int n=s.size();
+        if(numRows==1|| numRows>=n) return s;
 
-        for(char ch:s){
-            //add char in the cuurr row strig
-            rows[curR]+=ch;
+        vector<string> rows(numRows);
 
-            //change the increment/decrement if we reach 0 or numRow-1
-            if(curR==0) up=true;
-            if(curR==numRows-1) up=false;
+        int curR=0;
+        bool up=true;
 
-            //increment/decremnet acc to the flag
-            if(up) curR++;
-            else curR--;
+        for(char ch:s){
+            //add char in the cuurr row strig
+            rows[curR]+=ch;
 
-        }
-        //add all string acc to row
-        string ans="";
+            //change the increment/decrement if we reach 0 or numRow-1
+            if(curR==0) up=true;
+            if(curR==numRows-1) up=false;
+
+            //increment/decremnet acc to the flag
+            if(up) curR++;
+            else curR--;
+
+        }
+        //add all string acc to row
+        string ans="";
+        for(auto str:rows){
+            ans+=str;
+        }
+
+        return ans;
+
+    }
+};
 
 int main() {
     return 0;
