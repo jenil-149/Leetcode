@@ -8,24 +8,48 @@
 using namespace std;
 
 // --- LeetCode Solution ---
-            int mid = low + (high - low) / 2;
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
 
-            if(nums[mid] == target)
-                return true;
+        int low = 0;
+        int high = nums.size() - 1;
 
-            // Can't determine the sorted half
-            if(nums[low] == nums[mid] && nums[mid] == nums[high]){
-                low++;
-                high--;
-            }
+        while(low <= high){
 
-            // Left half is sorted
-            else if(nums[low] <= nums[mid]){
+            int mid = low + (high - low) / 2;
 
-                if(nums[low] <= target && target < nums[mid])
-                    high = mid - 1;
-                else
-                    low = mid + 1;
+            if(nums[mid] == target)
+                return true;
+
+            // Can't determine the sorted half
+            if(nums[low] == nums[mid] && nums[mid] == nums[high]){
+                low++;
+                high--;
+            }
+
+            // Left half is sorted
+            else if(nums[low] <= nums[mid]){
+                t// target lies in the sorted half
+                if(nums[low] <= target && target < nums[mid])
+                    high = mid - 1;
+                else
+                    low = mid + 1;
+            }
+
+            // Right half is sorted
+            else{
+                // target lies in the sorted half
+                if(nums[mid] < target && target <= nums[high])
+                    low = mid + 1;
+                else
+                    high = mid - 1;
+            }
+        }
+
+        return false;
+    }
+};
 
 int main() {
     return 0;
