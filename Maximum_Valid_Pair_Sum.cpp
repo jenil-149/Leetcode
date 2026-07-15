@@ -25,6 +25,7 @@ public:
         return ans;
     }
 };
+// brutforce will result in TLE
 
 int main() {
     return 0;
