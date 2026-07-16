@@ -8,19 +8,17 @@
 using namespace std;
 
 // --- LeetCode Solution ---
+// can do simliar to two sum making a map and storing the remainder count
 class Solution {
 public:
     int numPairsDivisibleBy60(vector<int>& time) {
-        unordered_map<int,int> mp;
-        int ans=0;
-      
-        for(int i=0;i<time.size();i++){
-            int rem=time[i]%60;
-            int req=(60-rem)%60;
-            if(mp.find(req)!=mp.end()){
-                ans+=mp[req];
-            }
-            mp[rem]++;
+        vector<int> freq(60, 0);
+        int ans = 0;
+
+        for (int t : time) {
+            int rem = t % 60;
+            ans += freq[(60 - rem) % 60];
+            freq[rem]++;
         }
         return ans;
     }
