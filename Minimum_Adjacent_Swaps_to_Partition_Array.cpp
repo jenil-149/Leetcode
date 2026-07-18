@@ -28,8 +28,6 @@ public:
                 p3++;
             }
         }
-
-
       
         return ans;
     }
