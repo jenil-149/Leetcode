@@ -43,7 +43,6 @@ public:
                 curr+=next1;
             }
             
-
             if(i+1<n){
                 int num=(s[i] - '0') * 10 + (s[i + 1] - '0');
                 if(num>=10 && num<=26){
