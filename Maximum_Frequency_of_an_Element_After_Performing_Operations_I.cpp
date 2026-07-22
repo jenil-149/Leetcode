@@ -17,6 +17,7 @@ public:
         unordered_map<int,int> freq;
 
         for(int i=0;i<nums.size();i++){
+            //store the freq of the elems that are already present
             freq[nums[i]]++;
 
             int l=max(nums[i]-k,0);
@@ -33,10 +34,14 @@ public:
           
             diff[target]+= (target >0? diff[target-1]:0);
 
+            //higest freq that can be acheived
             int targetFreq= freq[target];
+            //req conversions ,subtract freq already present
             int reqConversion=diff[target]-targetFreq;
 
+            //maxOperations that we can perform
             int maxOperations= min(reqConversion,numOperations);
+            //store maxFreq achiveable
             result=max(result,targetFreq+maxOperations);
 
         }
