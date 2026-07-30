@@ -19,10 +19,9 @@ public:
 
        int ans=0;
        for(int i=0;i<26;i++){
-            if(i<8) ans+=freq[i];
-            else if(i<16) ans+=2*freq[i];
-            else if(i<24) ans+=3*freq[i];
-            else ans+=4*freq[i];
+            if(freq[i]!= 0) {
+                ans += (i/8 +1) * freq[i]; 
+            }
         }
         return ans;
 
