@@ -25,6 +25,7 @@ public:
         ListNode* curr=head->next;
 
         while(curr!=NULL){
+            
             int a=prev->val;
             int b=curr->val;
             int GCD=gcd(a,b);
@@ -32,6 +33,7 @@ public:
             ListNode* temp=new ListNode(GCD);
             prev->next=temp;
             temp->next=curr;
+
             prev=curr;
             curr=curr->next;
 
