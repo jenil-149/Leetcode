@@ -8,6 +8,9 @@
 using namespace std;
 
 // --- LeetCode Solution ---
+//each elemnt is considered mininmun and the subaarry is found which hasith elem as min
+//it can be found by finding next smaller and previous smaller elem idx(using stack)
+
 class Solution {
 public:
     typedef long long ll;
