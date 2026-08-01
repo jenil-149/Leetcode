@@ -44,10 +44,8 @@ public:
             }
 
             ll cover=prefix[idx]-prefix[i];
-             if(idx > i && idx <= n - 1 &&
-               tiles[idx - 1][1] > carpetEnd) {
-
-                cover -= tiles[idx - 1][1] - carpetEnd;
+             if (idx > i) {
+                cover -= max(0LL, 1LL * tiles[idx - 1][1] - carpetEnd);
             }
 
             ans = max(ans, (int)cover);
