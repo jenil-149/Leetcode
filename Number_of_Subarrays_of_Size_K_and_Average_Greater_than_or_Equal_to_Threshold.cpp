@@ -14,13 +14,18 @@ public:
     int numOfSubarrays(vector<int>& arr, int k, int threshold) {
         int n=arr.size();
         int reqSum=threshold*k;
+
         int sum=accumulate(arr.begin(),arr.begin()+k,0);
         int ans=0;
+
         if(sum>=reqSum) ans++;
+
         for(int i=k;i<n;i++){
+            
             sum+=arr[i]-arr[i-k];
             if(sum>=reqSum) ans++;
         }
+
         return ans;
     }
 };
