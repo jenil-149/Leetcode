@@ -12,7 +12,7 @@ class Solution {
 public:
     int maxEqualRowsAfterFlips(vector<vector<int>>& matrix) {
         unordered_map<string,int> mp;
-
+        //we keep track of simialr patterns in each rows(1101 and 0010 are same pattern)
         for(auto x:matrix){
             string s="";
             for(auto y:x){
@@ -21,6 +21,7 @@ public:
             }
             mp[s]++;
         }
+
         int ans=0;
         for(auto &[s,val]:mp){
             ans=max(ans,val);
