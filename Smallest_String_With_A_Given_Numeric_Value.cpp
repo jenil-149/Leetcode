@@ -11,16 +11,21 @@ using namespace std;
 class Solution {
 public:
     string getSmallestString(int n, int k) {
-        string ans(n, 'a');
-        k -= n;  // remaining value after assigning 'a' to every position
+        int s = n - 1;
+        int a = 0;
 
-        for (int i = n - 1; i >= 0 && k > 0; i--) {
-            int add = min(25, k);
-            ans[i] += add;
-            k -= add;
+        while (s > 0 && k - s * 26 <= a) {
+            s--;
+            a++;
         }
 
-        return ans;
+        int req = k - s * 26 - a;
+
+        string a1(a, 'a');
+        string a2(1, char('a' + req - 1));
+        string a3(s, 'z');
+
+        return a1 + a2 + a3;
     }
 };
 
