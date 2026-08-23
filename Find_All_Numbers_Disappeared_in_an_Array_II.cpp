@@ -11,22 +11,27 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> findDisappearedNumbers(vector<int>& nums, int lower, int upper) {
-        nums.push_back(lower-1);
-        nums.push_back(upper+1);
 
         sort(nums.begin(),nums.end());
-
         int n=nums.size();
+        int prev=lower-1;
+
         vector<vector<int>> ans;
-        for(int i=0,j=1;j<n;i++,j++){
-            if(nums[i]<lower-1 || nums[j]>upper+1) continue;
-
-            if(nums[i]+1>nums[j]-1) continue;
-            ans.push_back({nums[i]+1,nums[j]-1});
-        }
-
-        return ans;
         
+        for(int n:nums){
+            if(n<lower) continue;
+            if(n>upper) break;
+
+            if(n>prev+1){
+                ans.push_back({prev+1,n-1});
+            }
+
+            prev=n;
+        }
+        if(prev<upper){
+            ans.push_back({prev+1,upper});
+        }
+        return ans; 
     }
 };
 
