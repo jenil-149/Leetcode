@@ -25,10 +25,11 @@ public:
     }
 
     int numDistinct(string s, string t) {
-        int n=s.size();
-        int m=t.size();
+        int n = s.size();
+        int m = t.size();
         memset(dp,-1,sizeof(dp));
         f(n-1,m-1,s,t);
+        
         return dp[n-1][m-1];
     }
 };
