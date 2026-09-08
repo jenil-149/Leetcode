@@ -13,32 +13,39 @@ public:
     int minimumOperationsToMakeEqual(int x, int y) {
         if(y>=x) return y-x;
 
-        int mx=1e4+10;
-        vector<int> dist(mx,1e9);
+        int UPPER=x+11 ;
+        vector<int> dist(UPPER+1,1e9);
 
         queue<int> q;
         q.push(x);
         dist[x]=0;
 
         while(!q.empty()){
-            int curr=q.front();
+            int cur=q.front();
             q.pop();
 
-            if(curr==y) return dist[curr];
+            if(cur==y) return dist[cur];
 
-            vector<int> next;
-            if(curr%11==0) next.push_back(curr/11);
-            if(curr%5==0) next.push_back(curr/5);
+            // cur - 1
+            if (cur - 1 >= 1 && dist[cur - 1] == 1e9) {
+                dist[cur - 1] = dist[cur] + 1;
+                q.push(cur - 1);
+            }
 
-            next.push_back(curr-1);
+            if (cur + 1 <= UPPER && dist[cur + 1] == 1e9) {
+                dist[cur + 1] = dist[cur] + 1;
+                q.push(cur + 1);
+            }
 
-            if(curr+1<=mx) next.push_back(curr+1);
 
-            for(int n:next){
-                if(n>=1  && n<=mx && dist[n]==1e9){
-                    dist[n]=dist[curr]+1;
-                    q.push(n);
-                }
+            if (cur % 5 == 0 && dist[cur / 5] == 1e9) {
+                dist[cur / 5] = dist[cur] + 1;
+                q.push(cur / 5);
+            }
+
+            if (cur % 11 == 0 && dist[cur / 11] == 1e9) {
+                dist[cur / 11] = dist[cur] + 1;
+                q.push(cur / 11);
             }
 
         }
