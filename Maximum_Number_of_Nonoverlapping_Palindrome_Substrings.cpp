@@ -9,49 +9,59 @@ using namespace std;
 
 // --- LeetCode Solution ---
 class Solution {
-public:
-    vector<vector<bool>> isPalindrome;
-    vector<int> t;
-
-    int solve(int n, int k) {
-        if (n < k) return 0;
-
-        if (t[n] != -1) 
-            return t[n];
-
-        int result = solve(n - 1, k); //ignore the current character s[n-1]
-
-        int j = n - 1;
-        //end the current palindrome at the current character s[n-1]
-        for (int i = 0; j-i+1>=k; i++) {
-            if (isPalindrome[i][j]) {
-                result = max(result, 1 + solve(i, k));
-            }
+public: 
+    int n;
+    vector<vector<int>> dp;
+    bool isPalidrome(int i,int j,string &s){
+        while(i<=j){
+            if(s[i]!=s[j]) return false;
+            i++;
+            j--;
         }
-
-        return t[n] = result;
+        return true;
     }
+    int f(int i,int j,int k,string & s){
+        if(i>=n || j>=n) return 0;
 
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        if(isPalidrome(i,j,s)){
+            int take=1+f(j+1,j+k,k,s);
+            int grow=f(i,j+1,k,s);
+            int slide=f(i+1,j+1,k,s);
+
+            return dp[i][j]=max({take,grow,slide});
+        }else{
+            int grow=f(i,j+1,k,s);
+            int slide=f(i+1,j+1,k,s);
+
+            return dp[i][j]= max(grow,slide);
+        }
+    }
     int maxPalindromes(string s, int k) {
-        int n = s.length();
-        isPalindrome.assign(n, vector<bool>(n, false));
+        n=s.size();
 
-        for (int L = 1; L <= n; L++) {
-            for (int i = 0; i + L <= n; i++) {
-                int j = i + L - 1;
+        if(k==1) return n;
+        dp.assign(n+1,vector<int>(n+1,0));
 
-                if (i == j) {
-                    isPalindrome[i][i] = true;
-                } else if (i + 1 == j) {
-                    isPalindrome[i][j] = (s[i] == s[j]);
-                } else {
-                    isPalindrome[i][j] = ((s[i] == s[j]) && isPalindrome[i+1][j-1] == true);
+        for(int i=n-1;i>=0;i--){
+            for(int j=n-1;j>=0;j--){
+                if(isPalidrome(i,j,s)){
+                    int take=1+(j+k<=n? dp[j+1][j+k]:0) ;
+                    int grow=dp[i][j+1];
+                    int slide=dp[i+1][j+1];
+
+                    dp[i][j]=max({take,grow,slide});
+
+                }else{
+                    int grow=dp[i][j+1];
+                    int slide=dp[i+1][j+1];
+
+                    dp[i][j]= max(grow,slide);
                 }
             }
         }
-
-        t.assign(n + 1, -1);
-        return solve(n, k);
+        return dp[0][k-1];
     }
 };
 
