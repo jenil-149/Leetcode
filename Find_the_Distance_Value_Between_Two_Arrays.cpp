@@ -1,0 +1,38 @@
+/**
+ * LeetCode Problem: Find the Distance Value Between Two Arrays
+ * Pushed by LeetCommit
+ * Date: 2026-11-05
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// --- LeetCode Solution ---
+class Solution {
+public:
+    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d) {
+        sort(arr2.begin(), arr2.end());
+
+        int ans = 0;
+
+        for (int x : arr1) {
+            auto it = lower_bound(arr2.begin(), arr2.end(), x);
+
+            bool valid = true;
+
+            if (it != arr2.end() && abs(x - *it) <= d)
+                valid = false;
+
+            if (it != arr2.begin() && abs(x - *prev(it)) <= d)
+                valid = false;
+
+            if (valid) ans++;
+        }
+
+        return ans;
+    }
+};
+
+int main() {
+    return 0;
+}
